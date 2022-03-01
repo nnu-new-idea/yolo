@@ -24,8 +24,9 @@ def reading(d,dic,image,ran):
     '''d表示相邻接线柱的像素距离，dic表示中间接线柱的坐标，img表示图片的相对路径，ran表示量程'''
     Lower = np.array([210, 120, 120])#要识别颜色的下限
     Upper = np.array([255, 255, 255])#要识别的颜色的上限
-    img = cv2.imread(image)
+    img = image
     img = cv2.inRange(img, Lower, Upper)
+    cv2.imwrite('1.jpg',img)
     num = fun(d,dic,img)
     return (num-10)*(ran/30)
 
@@ -39,7 +40,7 @@ def fun(d,dic,img):
                 continue
             if (j-loc[1])**2+(i-loc[0])**2<(0.7*d)**2 or (j-loc[1])**2+(i-loc[0])**2>d**2:
                 continue
-            r,g,b = img[j][i]
+            r = img[j][i]
             if r < 10:
                 
                 ang = angle((i-loc[0],j-loc[1]),(-1,0))
@@ -51,4 +52,4 @@ def fun(d,dic,img):
     for i in range(len(datas)):
         if i>m and datas[i] == datas[m]:
             return i
-    return m
+    return m+1
