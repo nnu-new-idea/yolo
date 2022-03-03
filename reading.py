@@ -26,7 +26,7 @@ def reading(d,dic,image,ran):
     Upper = np.array([255, 255, 255])#要识别的颜色的上限
     img = image
     img = cv2.inRange(img, Lower, Upper)
-    cv2.imwrite('1.jpg',img)
+    #cv2.imwrite('1.jpg',img)
     num = fun(d,dic,img)
     return (num-10)*(ran/30)
 
